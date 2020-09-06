@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  php:
+    container_name: php
+    build:
+      context: '.'
+      args:
+      - APP_ENV=development
+      - COMPOSER_NO_INTERACTION=0
+    image: php
+    ports:
+    - 801:80
+    volumes:
+    - ./src:/app
+    environment:
+    - LOG_STDOUT=/dev/null
+    - LOG_STDERR=/dev/null
+#    command: bash -c "composer update --lock --prefer-source && supervisord"
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: project
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      TZ: UTC
+    ports:
+      - 33061:3306
+    volumes:
+      - ./mysql:/var/lib/mysql:rw
+    command: "--innodb_use_native_aio=0"
