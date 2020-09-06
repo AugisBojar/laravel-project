@@ -22,7 +22,7 @@ RUN wget -O composer-setup.php --progress=bar:force https://getcomposer.org/inst
 # Run APP
 COPY --chown=1000:1000 ./src /app
 WORKDIR /app
-RUN chmod 0777 -R storage
-RUN chown -R www-data:www-data storage
+#RUN chmod 0777 -R storage
+#RUN chown -R www-data:www-data storage
 #RUN if [ "$APP_ENV" = "development" ]; then composer install; else composer install --no-dev --optimize-autoloader; fi
 #RUN (crontab -l ; echo "* * * * * /usr/local/bin/php /app/artisan schedule:run --env="$APP_ENV" >> /dev/null 2>&1") | crontab
